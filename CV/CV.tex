@@ -1,0 +1,129 @@
+\documentclass[11pt,a4paper,sans]{moderncv}
+
+
+%%packages
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{float}
+\usepackage{listings}
+\usepackage{enumitem}
+
+
+%% ModernCV themes
+\moderncvstyle{classic}
+\moderncvcolor{blue}
+\renewcommand{\familydefault}{\sfdefault}
+%\patchcmd{\makecvtitle}{[b]}{[t]}{}{}
+%\patchcmd{\makecvtitle}{[b]}{[t]}{}{}
+%\setlength{\makecvtitlenamewidth}{12cm}
+\renewcommand*{\namefont}{\fontsize{25}{29}\mdseries\upshape}
+\nopagenumbers{}
+
+%% Character encoding
+\usepackage[utf8]{inputenc}
+
+%% Adjust the page margins
+\usepackage[scale=0.75]{geometry}
+
+%% Personal data
+\firstname{Kees Herman Johannes Cornelis}
+\familyname{Kroep}
+%\renewcommand*{\titlefont}{\LARGE\mdseries\upshape}
+%\title{Resumé title (optional)}
+\address{C\'esar Franckstraat 113}{2625CC Delft}
+\mobile{+31~621~326~387}
+\phone{+31~621~326~387}
+\email{k.kroep1@gmail.com}
+\photo[92pt][0.5pt]{pasfoto.jpg}
+\extrainfo{16-04-1994}
+%\quote{Some quote (optional)}
+
+
+\renewcommand*{\cventry}[7][.25em]{%
+  \cvitem[#1]{#2}{%
+    {\bfseries#3}%
+   \ifthenelse{\equal{#4}{}}{}{, {\slshape#4}}% I changed thcd /is line (with comma) ...
+%    \ifthenelse{\equal{#4}{}}{}{ {\slshape#4}}% ... into this one (without comma).
+    \ifthenelse{\equal{#5}{}}{}{, #5}%
+    \ifthenelse{\equal{#6}{}}{}{, #6}%
+    %.\strut% here the dot is commented away
+    \ifx&#7&%
+      \else{\newline{}\begin{minipage}[t]{\linewidth}\small#7\end{minipage}}\fi}}
+%%%
+
+
+%%------------------------------------------------------------------------------
+%% Content
+%%------------------------------------------------------------------------------
+\begin{document}
+\makecvtitle
+
+\section{Education}
+\cventry{2015-current}{Master Computer Engineering and Electrical Engineering}{Delft University of Technology}{Delft.}{}{}%{ \newline}{
+\cventry{2016}{JPL/Caltech Summer Internship}{Jet Propulsion Laboratory, California Institute of Technology}{Los Angeles}{}{Characterization and testing of a custom readout ASIC for use with Gallium Nitride Avalanche Diodes. The Justus \& Louise van Effen scholarship supported the 10 week internship.}%{ \newline}{
+\cventry{2012-2015}{Bachelor Electrical Engineering}{Delft University of Technology}{Delft.}{}{%{ \newline}{
+  	\begin{itemize}
+        \item Cum Laude + Honours Program Bachelor
+        \item Bachelor Final Project grade of 9.5 (an extensible toolkit for real-time high performance wideband spectrum sensing)
+    \end{itemize}}
+\cventry{2006-2012}{Gymnasium}{Het 4e Gymnasium}{Amsterdam}{}{}
+
+\section{Honors \& Awards}
+
+    \cventry{2013-2015}{Honours Programme Bachelor TU Delft}{}{}{Participating in research concerning ultrasound imaging in heart operations using CMOS transducers. \newline Primary focus on researching realistic goals and requirements for ultrasound imaging.}{}
+\cventry{2013}{P-in-1 cum laude}{Delft University of Technology}{Delft}{Propaedeutics in one year with an average of at least 8 out of 10}{}
+
+
+
+\section{Work Experience}
+
+\cventry{2016}{subcontractor for NASA}{Delft University of Technology}{Delft (The Netherlands)}{Performing a feasability study on a Rad-Hard Lidar sensor for NASA's Europa Clipper}{}
+\cventry{2014-2015}{Teaching Assistant}{Delft University of Technology}{Delft (The Netherlands)}{Assisting students in the ``Beukende Bas'' project of the Electrical Engineering Bachelor.}{}
+
+
+\section{Miscellanious}
+
+\cventry{~}{Programming Languages}{}{C, C++, C\#, Java, Matlab, VHDL, Latex, Tikz}{}{}
+\cventry{~}{Artistic tools}{}{Adobe Photoshop, Adobe Illustrator, Blender, Unity}{}{}
+\cventry{~}{Design tools}{}{Modelsim, Xilinx, Vitruoso}{}{}
+
+
+%\cventry{}{}{}{}{}{\begin{itemize}
+%    \item \textbf{C, C++, C\#, java}
+    %\item \begin{itemize} Good understanding/experience \end{itemize}
+%    \item \textbf{Matlab}
+    %\item  \begin{itemize} Good understanding/experience \end{itemize}
+%    \item \textbf{VHDL}
+    %\item \begin{itemize} Some understanding/experience \end{itemize}
+%    \item \textbf{HTML, CSS, javascript, SQL}
+    %\item \begin{itemize} Some understanding/experience \end{itemize}
+%    \end{itemize}}
+    
+%\section{Interests \& Activitities}
+%\cventry{}{}{}{}{}{\begin{itemize}
+%    \item \textbf{Piano, Organ}
+%    \begin{itemize} Classical and Improvisation \end{itemize}
+%    \item \textbf{Singing}
+%     \begin{itemize} Jams and a few small performances \end{itemize}
+%    \item \textbf{Digital art}
+%    \begin{itemize} Concept Art and Illustrations using Photoshop and Wacom technology \end{itemize}
+%    \item \textbf{Chess}
+%    \item \textbf{Blender, Unity, Unreal Engine, Photoshop}
+%    \begin{itemize} Making small games and all aspects that come with it\end{itemize}
+%    \end{itemize}}
+    
+%\section{Languages}
+%\cventry{}{}{}{}{}{
+%    \begin{itemize}
+%    \item \textbf{Dutch}
+%     \begin{itemize} Native Language \end{itemize}
+%    \item \textbf{English}
+%     \begin{itemize} Good \end{itemize}
+%    \end{itemize}}
+    
+
+
+\end{document}
