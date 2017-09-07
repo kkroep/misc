@@ -1,0 +1,4 @@
+#! /usr/bin/fish
+
+rm build/*.class;
+javac -d build src/**/*.java;
