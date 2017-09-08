@@ -1,5 +1,5 @@
 #! /usr/bin/fish
 
 cd build;
-java AntColony Dr_KeKroepes KeKroepes KeKroepes KeKroepes;
+java AntColony Dr_KeKroepes KeKroepes KeKroepes Default;
 cd ..;

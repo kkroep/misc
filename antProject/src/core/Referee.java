@@ -5,11 +5,11 @@ import java.util.*;
 
 class Referee{
 	private int w,h;
-	private ArrayList<int[]> food;
+	private int[][] food = new int[128][128];
 	private Random rng = new Random();
 	private ArrayList<PlayerGrid> grid = new ArrayList<PlayerGrid>();
 	private int playerCount;
-	private int foodConcentration = 40;
+	private int foodConcentration = 400;
 
 
 	public Referee(int foodAmount, int w, int h, int playerCount){
@@ -17,7 +17,6 @@ class Referee{
 		this.h = h;
 		this.playerCount = playerCount;
 
-		food = new ArrayList<int[]>();
 		//rng.setSeed(0);
 		for(int i=0; i<playerCount; i++)
 			grid.add(new PlayerGrid());
@@ -26,15 +25,15 @@ class Referee{
 		for(int i=0; i<foodAmount; i++){
 			x = rng.nextInt(w/2);
 			y = rng.nextInt(h/2);
-			addFood(x, y, foodConcentration);
-			addFood(128-1-y, x, foodConcentration);
-			addFood(y, 128-1-x, foodConcentration);
-			addFood(128-1-x, 128-1-y, foodConcentration);
+			food[x][y] += foodConcentration;
+			food[128-1-y][x] += foodConcentration;
+			food[y][128-1-x] += foodConcentration;
+			food[128-1-x][128-1-y] += foodConcentration;
 		}
 	}
 
 	public void addFood(int x, int y, int amount){
-		food.add(new int[]{x, y, amount});
+		food[x][y] += amount;
 	}
 
 	public void addActiveFeromones(int x, int y, int playerNumber, double dosis){
@@ -78,40 +77,39 @@ class Referee{
 		return grid.get(playerNumber).getEnemyFeromones(x,y);
 	}
 
-	public int gatherFood(int x, int y){
-		for(int i=0; i<food.size(); i++){
-			if(food.get(i)[0]==x && food.get(i)[1]==y){
-				
-				food.get(i)[2]--;
-				// gradually remove food
-				if(food.get(i)[2]<1){
-					food.remove(i);
-				}
-				return 1;
-			}
+	public int gatherFood(int x, int y, int capacity){
+		//System.out.printf("%d", capacity);
+		int gatheredFood = 0;
+		if(capacity>food[x][y]){
+			gatheredFood = food[x][y];
+			food[x][y] = 0;
 		}
-		return 0;
+		else{
+			food[x][y] -= capacity;
+			gatheredFood = capacity;
+		}
+
+		return gatheredFood;
 	}
 
-	public int checkFood(int x, int y){
-		for(int i=0; i<food.size(); i++){
-			if(food.get(i)[0]==x && food.get(i)[1]==y){
-				return food.get(i)[2];
-			}
-		}
-		return 0;
-	}
+
+	public int checkFood(int x, int y){	return food[x][y];}
 
 	public void draw(int[][][] picture){
-		int[] coor;
 		//ig2.setPaint(Color.green);
-	    Iterator<int[]> iterator = food.iterator();
-		while (iterator.hasNext()){
-			coor = iterator.next();
-
-			picture[coor[0]][coor[1]][0]+=70;
-		    picture[coor[0]][coor[1]][1]+=70;
-		    picture[coor[0]][coor[1]][2]+=70;
+		for(int i=0; i<128; i++){
+			for(int j=0; j<128; j++){
+				if(food[i][j]>200){
+					picture[i][j][0]+=100;
+				    picture[i][j][1]+=100;
+				    picture[i][j][2]+=100;
+				}
+				else{
+					picture[i][j][0]+=(food[i][j]>>1);
+				    picture[i][j][1]+=(food[i][j]>>1);
+				    picture[i][j][2]+=(food[i][j]>>1);
+				}
+			}
 		}
 	}
 

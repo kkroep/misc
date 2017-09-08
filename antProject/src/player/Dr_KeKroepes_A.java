@@ -15,8 +15,10 @@ class Dr_KeKroepes_A extends AntBrain{
 	public int think(ProtectedAnt ant, Random rng){
 		/////////// PLAYER ADDED FUNCTIONAILTY
 		
+		if(ant.getStamina() == ant.getMaxStamina())
+			ant.setFeromoneDosis(0);
 
-		if((ant.getStaticMemory()&15)==3)
+		if((ant.getStaticMemory()&15)==1)
 			return worker(ant, rng);
 
 		if((ant.getStaticMemory()&15)==0)
@@ -60,7 +62,13 @@ class Dr_KeKroepes_A extends AntBrain{
 		// penalty for staying stationary
 		inc[0] *= 0.1;
 
-		
+
+		// forced direction protocol
+		int forcedDir = (ant.getStaticMemory()>>4)&15;
+		if(ant.getMaxStamina()-ant.getStamina()<32){
+			if(forcedDir>0 && forcedDir < 5)
+				return forcedDir;
+		}
 		// add value of feromones
 		
 		if(ant.getDynamicMemory() == 1){
@@ -69,14 +77,14 @@ class Dr_KeKroepes_A extends AntBrain{
 
 		//for worker
 		for(int i=1; i<5; i++){
-			/*if(ant.getEnemyFeromones(i)>0.2){
+			if(ant.getEnemyFeromones(i)>0.2 && forcedDir == 0){
 				ant.setDynamicMemory(new Byte("1"));
 				System.out.printf("H");
 				return 5;
-				}*/
+				}
 			if(inc[i]!=0){
 				inc[i] += ant.getActiveFeromones(0,i);
-				inc[i] -= 10*ant.getEnemyFeromones(i);
+				//inc[i] -= 10*ant.getEnemyFeromones(i);
 				if(inc[i]<0)
 					inc[i]=0;
 			}

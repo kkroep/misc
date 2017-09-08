@@ -4,9 +4,9 @@ import java.awt.geom.Rectangle2D;
 import java.util.*;
 
 class Dr_KeKroepes_Q extends QueenBrain{
-	private int produced = 0, frame = 0, foodEfficiency = 100;
+	private int produced = 0, frame = 0, foodEfficiency = 200;
 	private AntVariant worker = new AntVariant(
-		1,0,1,50, new Byte("0"));
+		2,1,10,110, new Byte("0"));
 	
 	private AntVariant scout = new AntVariant(
 		1,0,0,110, new Byte("0"));
@@ -18,6 +18,7 @@ class Dr_KeKroepes_Q extends QueenBrain{
 		2, 1, 1, 90, new Byte("0"));
 
 	private int forcedDir = 0;
+	private int foodStack = 50;
 
 	public Dr_KeKroepes_Q(){
 		System.out.printf("worker  %d food\n", worker.getCost());
@@ -42,7 +43,7 @@ class Dr_KeKroepes_Q extends QueenBrain{
 		antProps.setStaticMemory(staticMemory);
 
 		if(food>0)
-			foodEfficiency += 6;
+			foodEfficiency += 10;
 		else
 			foodEfficiency--;
 
@@ -54,22 +55,22 @@ class Dr_KeKroepes_Q extends QueenBrain{
 		frame++;
 		int type = 0; 
 
-        if(frame%250==0)
-        	System.out.printf("(%d)", foodEfficiency);
+        //if(frame%500==0)
+        	//System.out.printf("(%d)", foodEfficiency);
 
 
 		if(frame<2000)
-			foodEfficiency = 10;
+			foodEfficiency = 200;
 
-		if(frame==2000)
-			foodEfficiency = 0;
+		//if(frame==2000)
+		//	foodEfficiency = 0;
 
-		if(foodEfficiency>100)
-			foodEfficiency = 100;
+		if(foodEfficiency>100+player.colonySize())
+			foodEfficiency = 100+player.colonySize();
 
 		if( foodEfficiency <= 0){
 			System.out.printf("\nF:%d ---SWITCH! ", frame);
-			foodEfficiency = 100;
+			foodEfficiency = 100+player.colonySize();
 			if(forcedDir==0)
 				forcedDir = 4;
 			else if(forcedDir == 4)
@@ -78,38 +79,22 @@ class Dr_KeKroepes_Q extends QueenBrain{
 				forcedDir++;
 		}
 
-		/*if(frame<2500){
-			forcedDir = 0;	
-		}if(frame>2500){
-			forcedDir = 1;
-		}if(frame>4000){
-			forcedDir = 4;
-		}if(frame>5500){
-			forcedDir = 2;
-		}*/
-
-		/*if(frame>3500){
-			forcedDir = 2;
-		}
-		if(frame>9000){
-			forcedDir = 3;
-		}*/
 
 		int staticMemory = 0;
 		staticMemory += (forcedDir<<4);
 
-
+		foodStack = player.colonySize()*4+20;
 		switch (type){
-			case 0: if(player.getFood()>=standard.getCost()){
-								if(standard.createAnt(player, staticMemory+0)){
+			case 0: if(player.getFood()>=worker.getCost()+foodStack){
+								if(worker.createAnt(player, staticMemory+1)){
 									produced++;
 								}else{
 									System.out.printf("Err:%d ", player.getFood());
 								}
 							 }
 							 break;
-			default: 		if(player.getFood()>=standard.getCost()){
-								standard.createAnt(player, staticMemory+0);
+			default: 		if(player.getFood()>=worker.getCost()+foodStack){
+								worker.createAnt(player, staticMemory+1);
 								produced++;
 							 }
 							 break;

@@ -140,7 +140,7 @@ class Player{
 			// check of ant has returned and if so how much food
 			if(ant.isDead())
 			{
-				referee.addFood(ant.getX(), ant.getY(), ant.getCost());
+				referee.addFood(ant.getX(), ant.getY(), ant.getCost()-20);
 				iterator.remove();
 			}
 		}
@@ -148,6 +148,8 @@ class Player{
 
 	// execute a turn
 	public final void turn(){
+		food += referee.gatherFood(x, y, Integer.MAX_VALUE);
+
 		queenBrain.turn(protectedPlayer);
 
 
@@ -171,7 +173,14 @@ class Player{
 			//}
 			ant.applyAnt2Grid();
 			if(ant.endTurn(x, y)){
-				queenBrain.reportingAnt(ant.getAntProps(), food);
+				if(food <= 0){
+					//System.out.printf("D");
+				}else
+				{
+					food--;
+					ant.replenish();
+				}
+				queenBrain.reportingAnt(ant.getAntProps(), ant.getFood());
 				food += ant.dropFood();
 			}
 		}

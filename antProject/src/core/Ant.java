@@ -38,6 +38,8 @@ class Ant{
 	public void setDynamicMemory(Byte value){antProps.setDynamicMemory(value);}
 	public void clearMemory(){antProps.clearMemory();}
 
+	public void replenish(){antProps.replenish();}
+
 	public int getPreviousDir(){return previousDir;}
 	public int getStamina(){return antProps.getStamina();}
 	public int getMaxStamina(){return antProps.getMaxStamina();}
@@ -67,14 +69,16 @@ class Ant{
 	public int getFood(){return food;}
 	public int getMaxFood(){return antProps.getMaxFood();}
 
-	public void gatherFood(){addFood(referee.gatherFood(x, y));}
+	public void gatherFood(){addFood(referee.gatherFood(x, y, antProps.getMaxFood()-food));}
 
 	public void addFood(int amount){
 		food += amount;
 
 		// can only carry so much
-		if(food>antProps.getMaxFood())
+		if(food>antProps.getMaxFood()){
 			food=antProps.getMaxFood();
+			System.out.printf("::food dropped::");
+		}
 	}
 
 	public AntProperties getAntProps(){return antProps;}
@@ -103,9 +107,8 @@ class Ant{
 		//check if returned to home base
 		if(this.x == x && this.y == y)
 		{
-			antProps.staminaRefill();
 			path.removeAll(path);
-			setFeromoneDosis(0);
+			//setFeromoneDosis(0);
 			//antProps.clearMemory();
 			return true;
 		}

@@ -13,9 +13,7 @@ class KeKroepes_Q extends QueenBrain{
 
 	// called at the start of every turn
 	public void turn(ProtectedPlayer player){
-		if(player.getFood()>=5){
-			player.createAnt(2, 1, 1, 90, 0, new Byte("0"));
-		}
-
+		if(player.getFood()>(160+player.colonySize()*4))
+			player.createAnt(2,1,10,110, 0, new Byte("0"));
 	} 
 }

@@ -36,6 +36,11 @@ class AntProperties{
 	}
 
 	public int getHealth(){return health;}
+	public void replenish(){
+		health = maxHealth;
+		stamina = maxStamina;
+	}
+
 	public int getMaxHealth(){return maxHealth;}
 
 
@@ -53,22 +58,22 @@ class AntProperties{
 	public void staminaRefill(){stamina = maxStamina;}
 
 	public int calculateCost(){
-		int cost = 4;
+		int cost = 40;
 
 
 
 		// health cost. starts at 4, one food for one extra
-		cost += (maxHealth-1);
+		cost += (maxHealth-1)*10;
 
 		// damage cost
 		if(damage>0)
-			cost += damage+2; 
+			cost += damage*10+20; 
 		
 		// food cost
 		if(maxFood>0)
-			cost += maxFood+2; 
+			cost += maxFood+20; 
 
-		cost += (int)Math.ceil((maxStamina-50)/20.0);
+		cost += (int)Math.ceil((maxStamina-50)/2.0);
 
 		// make sure the ant is a valid one
 		if(maxHealth<1 || damage<0 || maxFood<0 || maxStamina<50)

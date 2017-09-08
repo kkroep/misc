@@ -66,7 +66,7 @@ public class AntColony{
       int[] fireBrick   = new int[]{170, 034, 034};
 
       int x = 40, y = 48; // coordinates of players, point symmetry
-      int startFood = 100;
+      int startFood = 1000;
 
       ArrayList<Player> players = new ArrayList<Player>(){};
       players.add(new Player(blueViolet, 0, x, y, startFood, referee, playerNames[0]));
@@ -104,6 +104,8 @@ public class AntColony{
                 System.out.printf(" ");
               System.out.printf("%d-",players.get(i).colonySize());
               System.out.printf("%d ", players.get(i).colonyFood());
+              if(players.get(i).colonyFood()<10000)
+                System.out.printf(" ");
               if(players.get(i).colonyFood()<1000)
                 System.out.printf(" ");
               if(players.get(i).colonyFood()<100)
