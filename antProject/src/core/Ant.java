@@ -71,6 +71,13 @@ class Ant{
 
 	public void gatherFood(){addFood(referee.gatherFood(x, y, antProps.getMaxFood()-food));}
 
+	public void eatFood(){
+		if(referee.checkFood(x, y)>0){
+			referee.gatherFood(x, y, 1);
+			replenish();
+		}
+	}
+
 	public void addFood(int amount){
 		food += amount;
 
@@ -82,6 +89,16 @@ class Ant{
 	}
 
 	public AntProperties getAntProps(){return antProps;}
+
+	public void dropFoodOnGround(int amount){
+		if(food>amount){
+			referee.addFood(x, y, amount);
+			food -= amount;
+		}else{
+			referee.addFood(x, y, food);
+			food = 0;
+		}
+	}
 
 	public int dropFood(){
 		int droppedFood = food;

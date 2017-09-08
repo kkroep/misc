@@ -21,7 +21,6 @@ class Default_A extends AntBrain{
 		if(!ant.hasFood()){
 			if(ant.checkFood(0)>0){
 				ant.setDynamicMemory(new Byte("1"));
-				ant.setFeromoneDosis(256/(ant.getMaxStamina()-ant.getStamina()+1));
 				return 6;
 			}else{
 				for(int i=1; i<5; i++){
@@ -30,12 +29,8 @@ class Default_A extends AntBrain{
 				}
 			}
 		}
-
-
-
 		
-
-			return (rng.nextInt(4)+1);
+		return (rng.nextInt(4)+1);
 	}
 }
 

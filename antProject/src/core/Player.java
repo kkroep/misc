@@ -162,6 +162,8 @@ class Player{
 			int action = ant.turn();
 			if(action==6)
 				ant.gatherFood();
+			if(action==7)
+				ant.eatFood();
 			else
 				ant.move(action);
 

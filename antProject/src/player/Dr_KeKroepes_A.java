@@ -79,7 +79,7 @@ class Dr_KeKroepes_A extends AntBrain{
 		for(int i=1; i<5; i++){
 			if(ant.getEnemyFeromones(i)>0.2 && forcedDir == 0){
 				ant.setDynamicMemory(new Byte("1"));
-				System.out.printf("H");
+				//System.out.printf("H");
 				return 5;
 				}
 			if(inc[i]!=0){

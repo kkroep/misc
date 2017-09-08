@@ -21,10 +21,10 @@ class Dr_KeKroepes_Q extends QueenBrain{
 	private int foodStack = 50;
 
 	public Dr_KeKroepes_Q(){
-		System.out.printf("worker  %d food\n", worker.getCost());
-		System.out.printf("scout   %d food\n", scout.getCost());
-		System.out.printf("warrior %d food\n", warrior.getCost());
-		System.out.printf("standard %d food\n", standard.getCost());
+		//System.out.printf("worker  %d food\n", worker.getCost());
+		//System.out.printf("scout   %d food\n", scout.getCost());
+		//System.out.printf("warrior %d food\n", warrior.getCost());
+		//System.out.printf("standard %d food\n", standard.getCost());
 
 	}
 
@@ -69,7 +69,7 @@ class Dr_KeKroepes_Q extends QueenBrain{
 			foodEfficiency = 100+player.colonySize();
 
 		if( foodEfficiency <= 0){
-			System.out.printf("\nF:%d ---SWITCH! ", frame);
+			//System.out.printf("\nF:%d ---SWITCH! ", frame);
 			foodEfficiency = 100+player.colonySize();
 			if(forcedDir==0)
 				forcedDir = 4;
@@ -89,7 +89,7 @@ class Dr_KeKroepes_Q extends QueenBrain{
 								if(worker.createAnt(player, staticMemory+1)){
 									produced++;
 								}else{
-									System.out.printf("Err:%d ", player.getFood());
+									//System.out.printf("Err:%d ", player.getFood());
 								}
 							 }
 							 break;

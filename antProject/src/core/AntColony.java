@@ -55,8 +55,6 @@ public class AntColony{
       // initializing main Loop
       Referee referee = new Referee(50, width, height, 4);
 
-      System.out.printf("\n%d\n", 15<<4);
-
       // color ideas
       int[] blue        = new int[]{20, 20, 255};
       int[] turquoise   = new int[]{064, 244, 208};
