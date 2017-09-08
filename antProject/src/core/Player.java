@@ -95,19 +95,29 @@ class Player{
 		return ants.size();
 	}
 
-	public void reportingAnt(AntProperties antProperties){
-		queenBrain.reportingAnt(antProperties);
+	public int colonyFood(){
+		int totalFood = food;
+
+		Iterator<Ant> iterator = ants.iterator();
+		while (iterator.hasNext()){
+			Ant ant = iterator.next();
+			totalFood += ant.getCost();
+		}
+		return totalFood;
+	}
+
+	public void reportingAnt(AntProperties antProperties, int food){
+		queenBrain.reportingAnt(antProperties, food);
 	}
 
 	public boolean createAnt(int maxHealth, int damage, int maxFood, int maxStamina, int staticMemory, Byte dynamicMemory){
-		if(food>=5){
 			try
 			{
 				Ant ant = new Ant(x,y, referee, (AntBrain)antBrainCtor.newInstance(), playerNumber, maxHealth, damage, maxFood, maxStamina, staticMemory, dynamicMemory);
 				//ants.add(new Ant(x,y, referee, (AntBrain)antBrainCtor.newInstance(), playerNumber, 3, 1, 1, 100)); 
 				int cost = ant.getCost();
 				
-				if(food>cost){
+				if(food>=cost){
 					ants.add(ant);
 					food -= cost;
 					return true;
@@ -117,10 +127,7 @@ class Player{
 			catch(Exception e){
 				System.out.printf("EXCEPTION: failed to make ant\n");
 				return false;
-			}	
-		}
-		else
-			return false;
+			}
 	}
 
 	public void takeDamage(){
@@ -163,7 +170,10 @@ class Player{
 				//iterator.remove();
 			//}
 			ant.applyAnt2Grid();
-			food += ant.endTurn(x, y);
+			if(ant.endTurn(x, y)){
+				queenBrain.reportingAnt(ant.getAntProps(), food);
+				food += ant.dropFood();
+			}
 		}
 
 		//System.out.printf("a= %d\n", ants.size());

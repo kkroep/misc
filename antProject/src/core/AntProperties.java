@@ -53,7 +53,7 @@ class AntProperties{
 	public void staminaRefill(){stamina = maxStamina;}
 
 	public int calculateCost(){
-		int cost = 7;
+		int cost = 4;
 
 
 
@@ -62,11 +62,11 @@ class AntProperties{
 
 		// damage cost
 		if(damage>0)
-			cost += (damage)*2+4; 
+			cost += damage+2; 
 		
 		// food cost
-		if(damage>0)
-			cost += (damage)*2+4; 
+		if(maxFood>0)
+			cost += maxFood+2; 
 
 		cost += (int)Math.ceil((maxStamina-50)/20.0);
 

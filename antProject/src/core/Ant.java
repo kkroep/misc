@@ -77,6 +77,14 @@ class Ant{
 			food=antProps.getMaxFood();
 	}
 
+	public AntProperties getAntProps(){return antProps;}
+
+	public int dropFood(){
+		int droppedFood = food;
+		food = 0;
+		return droppedFood;
+	}
+
 	public int checkFood(int dir){
 		if(dir<0 || dir>4)
 			dir=0;
@@ -88,7 +96,7 @@ class Ant{
 	public int getX(){return x;}
 	public int getY(){return y;}
 
-	public int endTurn(int x, int y){
+	public boolean endTurn(int x, int y){
 		antProps.turn();
 
 
@@ -98,18 +106,12 @@ class Ant{
 			antProps.staminaRefill();
 			path.removeAll(path);
 			setFeromoneDosis(0);
-			antProps.clearMemory();
-			if(hasFood())
-			{
-				int droppedFood = food;
-				food = 0;
-				return droppedFood;
-			}
-			return 0;
+			//antProps.clearMemory();
+			return true;
 		}
 		else
 		{
-			return 0;
+			return false;
 		}
 
 	}
@@ -123,11 +125,11 @@ class Ant{
 			return false;*/
 
 		if(antProps.getStamina()<1){
-			System.out.printf("-%d", antProps.getStaticMemory()+playerNumber);
+			System.out.printf("^%d", playerNumber);
 			return true;
 		}
 		if(antProps.getHealth()<1){
-			System.out.printf("%d", antProps.getStaticMemory()+playerNumber);
+			System.out.printf("%d", playerNumber);
 			return true;
 		}
 		return false;

@@ -8,7 +8,7 @@ class QueenBrain{
 	public QueenBrain(){}
 
 	// called every an ant returns to the queen location
-	public void reportingAnt(AntProperties antProperties){
+	public void reportingAnt(AntProperties antProperties, int food){
 	}
 
 	// called at the start of every turn

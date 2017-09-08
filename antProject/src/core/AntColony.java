@@ -1,6 +1,6 @@
 //import java.awt.BasicStroke;
 import java.awt.Color;
-//import java.awt.Font;
+import java.awt.Font;
 //import java.awt.FontMetrics;
 //import java.awt.GradientPaint;
 import java.awt.Graphics2D;
@@ -50,8 +50,12 @@ public class AntColony{
       GifSequenceWriter writer = new GifSequenceWriter(output, bi.getType(), 1, false);
       //writer.writeToSequence(bi);
 
+      ig2.setFont(new Font("TimesRoman", Font.PLAIN, 20)); 
+
       // initializing main Loop
-      Referee referee = new Referee(80, width, height, 4);
+      Referee referee = new Referee(50, width, height, 4);
+
+      System.out.printf("\n%d\n", 15<<4);
 
       // color ideas
       int[] blue        = new int[]{20, 20, 255};
@@ -61,8 +65,8 @@ public class AntColony{
       int[] darkOrange  = new int[]{255, 140, 000};
       int[] fireBrick   = new int[]{170, 034, 034};
 
-      int x = 41, y = 58; // coordinates of players, point symmetry
-      int startFood = 160;
+      int x = 40, y = 48; // coordinates of players, point symmetry
+      int startFood = 100;
 
       ArrayList<Player> players = new ArrayList<Player>(){};
       players.add(new Player(blueViolet, 0, x, y, startFood, referee, playerNames[0]));
@@ -72,7 +76,7 @@ public class AntColony{
       //player1.draw(picture);
 
       // main loop
-      for(int frame = 0; frame<5000; frame++){
+      for(int frame = 0; frame<14000; frame++){
         // clear image
         ig2.setPaint(new Color(15,15,15));
         ig2.fill(new Rectangle2D.Double(0, 0, width*multiplier, height*multiplier));
@@ -90,19 +94,29 @@ public class AntColony{
         referee.turn();
 
 
-
-        if(frame%50==0){
-          if(frame%250==0){
-            System.out.printf("\nFr:%d\t", frame);
+        if(frame%100==0){
+          if(frame%500==0){
+            System.out.printf("\nF:%d\t", frame);
             for(int i=0; i<4; i++){
-              System.out.printf("%d\t", players.get(i).colonySize());
+              if(players.get(i).colonySize()<100)
+                System.out.printf(" ");
+              if(players.get(i).colonySize()<10)
+                System.out.printf(" ");
+              System.out.printf("%d-",players.get(i).colonySize());
+              System.out.printf("%d ", players.get(i).colonyFood());
+              if(players.get(i).colonyFood()<1000)
+                System.out.printf(" ");
+              if(players.get(i).colonyFood()<100)
+                System.out.printf(" ");
+              if(players.get(i).colonyFood()<10)
+                System.out.printf(" ");
             }
           }
           System.out.printf("-");
         }
 
         // only draw a few frames
-        if(frame%10==0){
+        if(frame%25==0){
         //draw everything
         for(int i=0; i<width; i++)
           for(int j=0; j<height; j++)
@@ -130,11 +144,11 @@ public class AntColony{
               }
             }
         ig2.setPaint(Color.white);
-        ig2.drawString(String.format("Fr: %d", frame),10,10);
+        ig2.drawString(String.format("Fr: %d", frame),10,20);
 
         for(int i=0; i<players.size(); i++){
           ig2.setPaint(new Color(players.get(i).getColor()[0],players.get(i).getColor()[1],players.get(i).getColor()[2]));
-          ig2.drawString(String.format("%s(%d): %d", players.get(i).getName(), i, players.get(i).colonySize()),10,25+15*i);
+          ig2.drawString(String.format("%s(%d):  %d-%d", players.get(i).getName(), i, players.get(i).colonySize(), players.get(i).colonyFood()),10,40+20*i);
         }
 
         //store the image into the gif

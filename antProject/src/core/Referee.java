@@ -148,8 +148,8 @@ class PlayerGrid{
 	//public int checkDamage(int x, int y){return damageGrid[x][y];}
 
 	public int takeDamage(int x, int y, int health){
-		if(damageGrid[x][y]>4)
-			damageGrid[x][y]=4;
+		if(damageGrid[x][y]>8)
+			damageGrid[x][y]=8;
 
 		if(health<damageGrid[x][y])
 		{
