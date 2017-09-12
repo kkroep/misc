@@ -1,0 +1,56 @@
+\section*{Hardware Characterization}
+
+\subsection*{Required measurements}
+\begin{lstlisting}
+http://ra.ziti.uni-heidelberg.de/pages/student_work/
+seminar/ws0304/richard_sohnius/praesentation.pdf
+\end{lstlisting}
+
+
+Transition times. Characterized and measured between $30\,\%$ and $70\,\%$. Standardized reporting between $10\,\%$ and $90\,\%$.
+
+
+\begin{s_itemize} 
+\item area
+\item power
+\item timing contstraints (setup/Hold time, recovery/removal time)
+\item propagation delay time
+\item input capacitance
+\end{s_itemize} 
+%
+%
+\textbf{Power}:
+\begin{s_itemize}
+	\item Dynamic power (switching power)
+	\item Static power (leakage power)
+	\item Passive power (internal power. power used by sequential cells when inputs change without output change)
+\end{s_itemize}
+%
+%
+\textbf{Delay}:
+\begin{lstlisting}
+https://www.csee.umbc.edu/~cpatel2/links/641/slides/lect05_LIB.pdf
+\end{lstlisting}
+
+\begin{s_itemize}
+\item sum of intrinsic delay, slope delay, transition delay and connect delay
+\item intrinsic delay is fixed value independent of surroundings
+\item slope delay is produced by the slew of the input signal
+\item transition delay is the time required to change the capacitance of the next stage input pins
+\item connect delay is delay caused by the wire between output and next input pins
+\end{s_itemize}
+
+Delay model of Liberate (.lib) is the CMOS Non-Linear Delay Model.
+\begin{s_itemize}
+\item Delay and transition time are modeled as function of Input slew and Output load
+\item Data is stored in a 2D LUT (look-up table)
+\item Intermediate values are interpolated
+\item Data points are usually not equidistant
+\end{s_itemize}
+
+
+
+
+
+\subsection*{solutions}
+feedback loop with a counter?
