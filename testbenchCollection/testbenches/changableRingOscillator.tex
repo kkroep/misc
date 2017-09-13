@@ -157,3 +157,56 @@
 \label{tkz:changableRingOscillator2}
 \end{figure}
 
+
+
+\begin{figure}[H]
+\centering
+\tikzstyle{dot} = [draw,shape=circle,fill=black, scale =.3]
+\begin{tikzpicture}
+% Buffer
+\draw (3,2.75) node [buffer, scale=.6, rotate = -90] (buf1) at (3,3) {};
+
+% DEMUX
+\draw (3,2.75) node [and port, scale=.7, rotate = -90] (and1) at (3,1.5) {};
+\draw
+(buf1.out) -- (3,2.3)
+(1.75,2.52) -| (and1.in 1)
+(1.75,2.48) -| (and1.in 2);
+\node [anchor=east] at (1.75,2.5) {sel};
+
+% Shift register + XOR
+\draw (3,2.75) node [xor port, scale=.7, rotate = -90] (xor1) at (3,0.25) {};
+\draw  (3.75,2.25) rectangle (4.75,1.5) node[pos=.5]{SFF};
+\draw 
+(and1.out) -| (xor1.in 2)
+(4.25,1.5) |- (xor1.in 1)
+;
+
+% DEMUX
+\draw (3,2.75) node [and port, scale=.7, rotate = -90] (and2) at (3,-1) {};
+\draw
+(xor1.out) -- (3,-0.2)
+(1.75,0.02) -| (and2.in 1)
+(1.75,-0.02) -| (and2.in 2);
+\node [anchor=east] at (1.75,0) {sel};
+
+% actual component
+\draw [fill=lightgray] (2,-1.25) rectangle (4,-2) node[pos=.5]{\small{component}};
+\draw (and2.out) -- (3,-1.25);
+
+% MUX
+\draw (3,2.75) node [buffer, scale=.6, rotate = -90] (buf2) at (3,-2.5) {};
+\draw (3,-2) -- (buf2.in);
+\draw (3,2.75) node [and port, scale=.7, rotate = -90] (and3) at (3,-4) {};
+\draw
+(3,-3.19) -- (buf2.out)
+(1.75,-2.98) -| (and3.in 1)
+(1.75,-3.02) -| (and3.in 2);
+\node [anchor=east] at (1.75,-3) {sel};
+
+%loop
+\draw (and3.out)-| (5,3.5) -| (buf1.in);
+\end{tikzpicture}
+\caption{critical path of dynamic ring oscillator}
+\label{tkz:criticalPath}
+\end{figure}
