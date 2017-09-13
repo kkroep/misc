@@ -1,0 +1,52 @@
+\subsection*{Phase Detector}
+The phase detector  produces a 1 between the time the reference signal switches to a one, and the divider switches to a one.
+
+
+\begin{figure}[H]
+\centering
+\tikzstyle{dot} = [draw,shape=circle,fill=black, scale =.3]
+\begin{tikzpicture}
+
+% DFF Block
+\draw  (-1.5,1) rectangle (0,-0.5);
+\draw (-1.5,-0.125) to (-1.25,-0.25) to (-1.5,-0.375);
+\node at (-1.25,0.75) {$D$};
+\node at (-0.25,0.25) {$Q$};
+
+% DFF Block
+\draw  (-1.5,-1.5) rectangle (0,-3);
+\draw (-1.5,-2.625) to (-1.25,-2.75) to (-1.5,-2.875);
+\node at (-1.25,-1.75) {$D$};
+\node at (-0.25,-2.25) {$Q$};
+
+% and gate
+\draw (0,0) node [and port, rotate=180] (and1) at (0.5,-1) {};
+\draw (0,-2.25) -| (and1.in 1);
+\draw (0,.25) -| (and1.in 2);
+
+% reset
+\draw (-0.75,-0.5) |- (and1.out);
+\draw (-0.75, -1) -- (-0.75, -1.5);
+\node [dot] at (-0.75,-1) {};
+\node [anchor=east] at (-0.75,-1) {reset};
+
+% 1's
+\draw(-1.75,0.75) -- (-1.5,0.75);
+\node [anchor=east] at (-1.75,0.75) {$1$};
+\draw(-1.75,-1.75) -- (-1.5,-1.75);
+\node [anchor=east] at (-1.75,-1.75) {$1$};
+
+% signals
+\draw(-1.75,-0.25) -- (-1.5,-0.25);
+\node [anchor=east] at (-1.75,-0.25) {ref$(t)$};
+\draw(-1.75,-2.75) -- (-1.5,-2.75);
+\node [anchor=east] at (-1.75,-2.75) {div$(t)$};
+
+% error
+\draw(1.875,.25) -- (2.25,0.25);
+\node [anchor=south] at (1.9,0.25) {error$(t)$};
+\node[dot] at (1.885,.25) {};
+\end{tikzpicture}
+\caption{Phase detector}
+\label{tkz:phaseDetector}
+\end{figure}
