@@ -1,0 +1,125 @@
+\subsection*{Optimized seperate ring design}
+
+\begin{figure}[H]
+\centering
+\tikzstyle{dot} = [draw,shape=circle,fill=black, scale =.2]
+\begin{tikzpicture}[scale=1.25]
+%loop
+
+
+%loop
+\draw [] plot [smooth cycle] coordinates {(0,-4.25) (0,-0.75) (0.25,-0.75) (0.25,-4.25)};
+\draw [fill=white] (-0.125,-4.25) rectangle (0.375,-4.75);
+\draw[>=latex,->] (-0.0008,-4.1625) -- (0,-4.25);
+
+%loop
+\draw [] plot [smooth cycle] coordinates {(0.75,-4.25) (0.75,-0.75) (1,-0.75) (1,-4.25)};
+\draw [fill=white] (0.625,-4.25) rectangle (1.125,-4.75);
+\draw[>=latex,->] (0.7492,-4.1625) -- (0.75,-4.25);
+
+%loop
+\draw [] plot [smooth cycle] coordinates {(1.5,-4.25) (1.5,-0.75) (1.75,-0.75) (1.75,-4.25)};
+\draw [fill=white] (1.375,-4.25) rectangle (1.875,-4.75);
+\draw[>=latex,->] (1.4992,-4.1625) -- (1.5,-4.25);
+%loop
+\draw [] plot [smooth cycle] coordinates {(2.25,-4.25) (2.25,-0.75) (2.5,-0.75) (2.5,-4.25)};
+\draw [fill=white] (2.125,-4.25) rectangle (2.625,-4.75);
+\draw[>=latex,->] (2.2492,-4.1625) -- (2.25,-4.25);
+
+%loop
+\draw [] plot [smooth cycle] coordinates {(3,-4.25) (3,-0.75) (3.25,-0.75) (3.25,-4.25)};
+\draw [fill=white] (2.875,-4.25) rectangle (3.375,-4.75);
+\draw[>=latex,->] (2.9992,-4.1625) -- (3,-4.25);
+
+%loop
+\draw [] plot [smooth cycle] coordinates {(3.75,-4.25) (3.75,-0.75) (4,-0.75) (4,-4.25)};
+\draw [fill=white] (3.625,-4.25) rectangle (4.125,-4.75);
+\draw[>=latex,->] (3.7492,-4.1625) -- (3.75,-4.25);
+
+%loop
+\draw [] plot [smooth cycle] coordinates {(4.5,-4.25) (4.5,-0.75) (4.75,-0.75) (4.75,-4.25)};
+\draw [fill=white] (4.375,-4.25) rectangle (4.875,-4.75);
+\draw[>=latex,->] (4.4992,-4.1625) -- (4.5,-4.25);
+
+
+% or and counter and shift register
+\draw  (1.25,-5.75) rectangle (3.75,-6.25)node[pos=.5]{8-OR};
+\draw  (1.25,-6.5) rectangle (3.75,-7)node[pos=.5]{Counter};
+\draw  (-1,-7.25) rectangle (3.75,-7.75)node[pos=.5]{Shift register};
+%or connections
+\draw [>=latex, -] (2.5,-5) -| (1.75,-4.75);
+\draw [>=latex, -] (1.75,-5) -| (1,-4.75);
+\draw [>=latex, -] (1,-5) -| (0.25,-4.75);
+
+\draw [>=latex, -] (3.25,-5) -| (2.5,-4.75);
+\draw [>=latex, -] (3.25,-5) -| (3.25,-4.75);
+\draw [>=latex, -] (3.25,-5) -| (4,-4.75);
+\draw [>=latex, -] (4,-5) -| (4.75,-4.75);
+\draw [>=latex, -](2.5,-5) -- (2.5,-5.75);
+
+
+\node [dot] at (1,-5) {};
+\node [dot] at (1.75,-5) {};
+\node [dot] at (2.5,-5) {};
+\node [dot] at (3.25,-5) {};
+\node [dot] at (4,-5) {};
+
+% MUX connections
+\draw [>=latex, ->] (2.25,-5.25) -| (1.5,-4.75);
+\draw [>=latex, ->] (1.5,-5.25) -| (0.75,-4.75);
+\draw [>=latex, ->] (0.75,-5.25) -| (0,-4.75);
+
+\draw [>=latex, ->] (3,-5.25) -| (2.25,-4.75);
+\draw [>=latex, ->] (3,-5.25) -| (3,-4.75);
+\draw [>=latex, ->] (3,-5.25) -| (3.75,-4.75);
+\draw [>=latex, ->] (3.75,-5.25) -| (4.5,-4.75);
+\draw [>=latex, -](0,-5.25) -- (0,-6.5);
+
+\node [dot] at (0,-5.25) {};
+\node [dot] at (0.75,-5.25) {};
+\node [dot] at (1.5,-5.25) {};
+\node [dot] at (2.25,-5.25) {};
+\node [dot] at (3,-5.25) {};
+\node [dot] at (3.75,-5.25) {};
+
+%mux
+\draw (-1,-7) -- (-0.5,-6.5) -- (0.5,-6.5) -- (1,-7) -- (-1,-7); 
+\node at (0,-6.75) {3-8 MUX};
+\draw (-2,-7) -- (-1.5,-7) |- (-1,-7.375);
+\draw (-2,-7.5) -- (-1.5,-7.5) -- (-1,-7.5);
+\draw (-2,-8) -- (-1.5,-8) |- (-1,-7.625);
+\node [anchor=east] at (-2,-7) {Scan In};
+\node [anchor=east] at (-2,-7.5) {Scan Enable};
+\node [anchor=east] at (-2,-8) {Clock};
+
+\draw [>=latex, ->](3.75,-7.5) -- (4.25,-7.5);
+\node [anchor=west] at (4.25,-7.5) {Scan Out};
+
+% conections
+\draw (2.5,-6.5) -- (2.5,-6.25);
+\draw [>=latex,<-](2.5,-7.25) -- (2.5,-7);
+\draw (0,-7.25) -- (0,-7);
+
+% zoom in 
+\draw  [line width = 0.25 mm](-0.625,-4.25) rectangle (-3.625,-1.25);
+\draw (-0.375,-1.5) node [nand port, scale=.75, rotate = 0] (and1) at (-2.125,-2.75) {};
+\draw (-0.375,-1.5) node [not port, scale=.75, rotate = 90] (inv1) at (-1.375,-2) {};
+\draw (-0.375,-1.5) node [not port, scale=.75, rotate = -90] (inv2) at (-1.375,-3.5) {};
+
+\draw (and1.out) -| (inv1.in);
+\draw (-1.375,-2.75) -| (inv2.in);
+\draw (-1.375,-4.25) -- (inv2.out);
+\draw (-1.375,-1.25) -- (inv1.out);
+\node [dot] at (-1.375,-2.75) {};
+
+\draw (-3.125,-1.25) -| (and1.in 1);
+\draw (-3.125,-4.25) -| (and1.in 2);
+
+\draw [dashed](0.375,-4.25) -- (-0.625,-1.25);
+\draw [dashed](-0.125,-4.75) -- (-3.625,-4.25);
+
+\end{tikzpicture}
+
+\caption{optimized seperate ring design}
+\label{tkz:optimizedSeperateRingDesign}
+\end{figure}

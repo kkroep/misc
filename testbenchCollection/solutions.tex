@@ -43,24 +43,33 @@
 \end{align*}
 
 \begin{align*}
-LSB &= \frac{T}{\text{counts}}\\
-t_{meas} &= T\cdot \text{counts} = \frac{T^2}{LSB}\\
-bits &= \lceil\log_2(\text{counts})\rceil
-\end{align*}
-%For example, take a path with 50 components of $\approx 50\,ps$ delay, with a requirement of $1\,ps$ resolution
-\begin{align*}
-\text{for 50 components with $\approx 50\,ps$} &\text{ delay, and $1\,ps$ resolution requirement}  \\
-T &= 2500\,ps\\
-\text{counts} &= 2500\\
-t_{meas} &= 6.25\,\mu s\\
-bits &= 12
+LSB &= \frac{T}{\text{counts}\cdot \text{components}}\\
+t_{meas} &= T\cdot \text{counts} = \frac{T^2}{LSB\cdot\text{components}}\\
 \end{align*}
 
-\begin{align*}
-\text{for 10 components with $\approx 50\,ps$} &\text{ delay, and $1\,ps$ resolution requirement}  \\
-T &= 500\,ps\\
-\text{counts} &= 500\\
-t_{meas} &= 250\,ns\\
-bits &= 9
-\end{align*}
+\begin{table}[H]
+\centering
+\caption{Requirements for $1\,ps$ resolution}
+\label{my-label}
+\begin{tabular}{|l|ll|ll|ll|ll|} \hline
+ring size                     & 1         & 1         & 8         & 8         & 64          & 64          & 512           & 512        \\
+component delay               & $50\,ps$  & $100\,ps$ & $50\,ps$  & $100\,ps$ & $50\,ps$    & $100\,ps$   & $50\,ps$      & $100\,ps$  \\ \hline
+Period (T)                    & $50\,ps$  & $100\,ps$ & $400\,ps$ & $800\,ps$ & $3.2\,ns$   & $6.4\,ns$   & $25.6\,ns$    & $51.2\,ns$ \\
+max counts                    & 50        & 100       & 50        & 100       & 50          & 100         & 50            & 100      \\
+measurement time ($t_{meas}$) & $2.5\,ns$ & $10\,ns$  & $20\,ns$  & $80\,ns$  & $160\,ns$   & $640\,ns$   & $1.28\,\mu s$ & $5.12\,\mu s$  \\ \hline
+\end{tabular}
+\end{table}
 
+for $N$ the number of elements in the Ring Oscillator
+\begin{align*}
+\Delta t_c &= \mathcal{N}(\mu_c,\sigma_c^2)\\
+\Delta t_{RO}&= \mathcal{N}(N\mu_c,\sqrt{N}\sigma_{c}^2)\\
+\frac{\Delta t_{RO}}{N}&= \mathcal{N}(\mu_c,\frac{\sigma_{c}^2}{\sqrt{N}}) 
+\end{align*}
+for $N$ the number of elements in the Ring Oscillator\\
+for $C$ the number of counts
+\begin{align*}
+t_c &= \mathcal{N}(\Delta t_c,\sigma_d^2)\\
+t_{RO}&= \mathcal{N}(C\Delta t_{RO},\sqrt{NC}\sigma_{d}^2) \\
+\frac{t_{RO}}{NC}&= \mathcal{N}(\frac{\Delta t_{RO}}{N},\frac{\sigma_{d}^2}{\sqrt{NC}}) 
+\end{align*}
