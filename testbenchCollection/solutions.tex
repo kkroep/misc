@@ -39,13 +39,17 @@
 
 
 \begin{align*}
-\sigma_{tot} = \sqrt{\frac{\sigma_{c,s}^2}{\text{components}}+\frac{\sigma_{c,d}^2+\sigma_{l,d}^2}{\text{counts}}}
+t_{meas} &= \frac{1}{acc_{\%}}\cdot T = \frac{1}{acc_{\%}}\cdot (noC\cdot \tau_C+\tau_x)\\
+t_{meas} &= \frac{\tau_C}{acc_{t}}\cdot T = \frac{\tau_C}{acc_{t}}\cdot (noC\cdot \tau_C+\tau_x)
 \end{align*}
 
 \begin{align*}
-LSB &= \frac{T}{\text{counts}\cdot \text{components}}\\
-t_{meas} &= T\cdot \text{counts} = \frac{T^2}{LSB\cdot\text{components}}\\
+\text{Count} &= 200 &\text{for } t_{meas}=1\,\mu s\\
+T &= \frac{t_{meas}}{\text{Count}} = 5\,ns\\
+\tau_C &= \frac{T-\tau_x}{noC} = 37.5\,ps&\text{for }tau_x = 200\,ps, noC = 128
 \end{align*}
+
+
 
 \begin{table}[H]
 \centering

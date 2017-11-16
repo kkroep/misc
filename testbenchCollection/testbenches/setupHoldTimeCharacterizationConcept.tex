@@ -1,0 +1,81 @@
+\subsection*{Indian concept for setup/hold time characterization}
+
+\begin{figure}[H]
+\centering
+
+\tikzstyle{dot} = [draw,shape=circle,fill=black, scale =.15]
+\begin{tikzpicture}[scale=1]
+
+\draw (3.75,-0.75) node [buffer, scale=.3, rotate = 0] (buf0) at (0.98,-1.5) {};
+\draw (3.75,-0.75) node [buffer, scale=.3, rotate = 0] (buf1) at (1.48,-1.5) {};
+\draw (3.75,-0.75) node [buffer, scale=.3, rotate = 0] (buf2) at (1.98,-1.5) {};
+\draw (3.75,-0.75) node [buffer, scale=.3, rotate = 0] (buf3) at (2.48,-1.5) {};
+\draw (3.75,-0.75) node [buffer, scale=.3, rotate = 0] (buf4) at (2.98,-1.5) {};
+\draw (3.75,-0.75) node [buffer, scale=.3, rotate = 0] (buf5) at (3.48,-1.5) {};
+\draw (3.75,-0.75) node [buffer, scale=.3, rotate = 0] (buf6) at (3.98,-1.5) {};
+\draw (3.75,-0.75) node [buffer, scale=.3, rotate = 0] (buf7) at (4.48,-1.5) {};
+\draw (3.75,-0.75) node [buffer, scale=.3, rotate = 0] (buf8) at (4.98,-1.5) {};
+\draw (3.75,-0.75) node [buffer, scale=.3, rotate = 0] (buf9) at (5.48,-1.5) {};
+
+\draw
+(buf0.out) -- (buf1.in)
+(buf1.out) -- (buf2.in)
+(buf2.out) -- (buf3.in)
+(buf3.out) -- (buf4.in)
+(buf4.out) -- (buf5.in)
+(buf5.out) -- (buf6.in)
+(buf6.out) -- (buf7.in)
+(buf7.out) -- (buf8.in)
+(buf8.out) -- (buf9.in);
+
+\draw 
+(0.75,-1.5) -- (0.75,-2)
+(1.25,-1.5) -- (1.25,-2)
+(1.75,-1.5) -- (1.75,-2)
+(2.25,-1.5) -- (2.25,-2)
+(2.75,-1.5) -- (2.75,-2)
+(3.25,-1.5) -- (3.25,-2)
+(3.75,-1.5) -- (3.75,-2)
+(4.25,-1.5) -- (4.25,-2)
+(4.75,-1.5) -- (4.75,-2)
+(5.25,-1.5) -- (5.25,-2)
+(buf9.out) -| (5.75,-2);
+
+\draw [thick] (1,-3) -- (0.5,-2) -- (6,-2) -- (5.5,-3) -- cycle; % MUX
+
+\node [dot] at (0.75,-1.5) {};
+\node [dot] at (1.25,-1.5) {};
+\node [dot] at (1.75,-1.5) {};
+\node [dot] at (2.25,-1.5) {};
+\node [dot] at (2.75,-1.5) {};
+\node [dot] at (3.25,-1.5) {};
+\node [dot] at (3.75,-1.5) {};
+\node [dot] at (4.25,-1.5) {};
+\node [dot] at (4.75,-1.5) {};
+\node [dot] at (5.25,-1.5) {};
+
+% top line
+\draw (3.75,-0.75) node [buffer, scale=.5, rotate = 0] (buf10) at (3.25,0) {};
+\draw 
+(0.75,0) -- (0.75,-1.5)
+(buf10.out) -- (7,0)
+(0,0) -- (buf10.in);
+
+\node [dot] at (0.75,0) {};
+\draw  (7,0.5) rectangle (8.5,-1.5);
+\node [anchor=west] at (7,0) {D};
+\node [anchor=west] at (7,-1) {Clk};
+\node [anchor=east] at (8.5,0) {Q};
+
+
+\draw (3.25,-3) |- (6.5,-3.5) |- (7,-1);
+\draw [double](0,-2.5) -- (0.75,-2.5);
+
+\node [anchor=east] at (0,0) {function generator};
+\node [anchor=east] at (0,-2.5) {selector};
+\end{tikzpicture}
+
+
+\caption{Setup/hold time characterization concept}
+\label{tkz:characterizationConcept}
+\end{figure}

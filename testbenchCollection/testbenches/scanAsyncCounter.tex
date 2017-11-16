@@ -1,0 +1,71 @@
+\subsection*{Scan asynchronous counter}
+
+\begin{figure}[H]
+\centering
+
+\tikzstyle{dot} = [draw,shape=circle,fill=black, scale =.3]
+\begin{tikzpicture}[scale=.75]
+
+\draw (11.5,4) node [not port, scale=.75, rotate = 0] (inv1) at (11.5,4) {};
+\draw (13.5,4) node [not port, scale=.75, rotate = 0] (inv2) at (13.5,4) {};
+\draw (13.5,2) node [not port, scale=.75, rotate = 0] (inv3) at (13.5,2) {};
+
+%clk
+\draw (13.5,2) node [not port, scale=.75, rotate = 0] (inv_clk) at (5,0) {};
+\draw [thick] (1,-0.5) to (0,-1) to (0,1) to (1,0.5)  to cycle; % MUX
+
+% latch 1
+\draw (13.5,2) node [nor port, scale=.75, rotate = 0] (nand_l1) at (5.4521,3.22) {};
+\draw [thick] (3,3) -- (2,2.5) -- (2,4.5) -- (3,4) -- cycle; % MUX
+\draw (nand_l1.out) |- (1.5,5.5) |- (2,4);
+\node at (3.1,3.5) {$\circ$};
+\draw (3.175,3.5) -| (nand_l1.in 1);
+\draw (2.5,2.75) -- (2.5,0) --(1,0);
+
+% latch 2
+\draw (13.5,2) node [nor port, scale=.75, rotate = 0] (nand_l2) at (10.2771,3.22) {};
+\draw [thick] (8,3) -- (7,2.5) -- (7,4.5) -- (8,4) -- cycle; % MUX
+\draw (nand_l2.out) |- (6.325,5.5) |- (7,4);
+\node at (8.1,3.5) {$\circ$};
+\draw (8.175,3.5) -| (nand_l2.in 1);
+\draw (7.5,2.75) |- (inv_clk.out);
+
+% connections
+\draw 
+(inv1.out) -- (inv2.in)
+(12.5,4) |- (-0.5,6) |- (0,4)
+(-0.5,3) -- (0,3)
+(-0.5,1.5) -| (0.5,0.75)
+(0.5,1.5) -- (0.5,2.75)
+(-0.5,0.5) -- (0,0.5)
+(nand_l2.out) |- (inv3.in)
+(-0.5,2) -| (nand_l2.in 2)
+(4,2) |- (nand_l1.in 2)
+(-0.5,-0.5) -- (0,-0.5)
+(inv_clk.in) -- (2.5,0)
+(10.43,4) -- (inv1.in);
+
+\draw [thick] (1,3) -- (0,2.5) -- (0,4.5) -- (1,4) -- cycle; % MUX
+
+%labels
+\node [anchor=east] at (-0.5,3) {SI};
+\node [anchor=east] at (-0.5,2) {R};
+\node [anchor=east] at (-0.5,1.5) {SE};
+\node [anchor=east] at (-0.5,0.5) {D};
+\node [anchor=east] at (-0.5,-0.5) {CLK};
+\node at (14.5,4) {Q};
+\node at (14.5,2) {$\bar{\text{Q}}$};
+
+% dots
+\node [dot] at (2.5,0) {};
+\node [dot] at (4,2) {};
+\node [dot] at (0.5,1.5) {};
+\node [dot] at (10.425,4) {};
+\node [dot] at (10.425,3.225) {};
+\node [dot] at (12.5,4) {};
+\end{tikzpicture}
+
+
+\caption{Block of a scan asynchronous counter}
+\label{tkz:scanAsyncCounter}
+\end{figure}
