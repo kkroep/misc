@@ -1,0 +1,25 @@
+notes about continuous FEC:
+
+First let's make a distinction in two types of errors we want to protect against:
+- uniformly distributed random errors
+- burtsy errors
+
+For bursty errors, there are a lot of very promising ideas already, that we can try that I haven't done so yet.
+
+This revolves my finding of the FEC to cover uniformly distributed random errors.
+What was tried is increasing the priority of sensors that have recently experienced a large surprize, or flat out retransmitting important packets. Also what was tried was sending more information on important sensors. All solutions didn't beat the baselineperformance. However, back then there where a few key difference that make these attempts obsolete.  
+
+Back when I looked into this the assumption was that the information was bandwidth limited, meaning that an addition of extra info, would remove information somewhere else.
+If this is not the case the behavior changes, and some "media specific fortification" (MSF) can be added. MSF is a term I just came up with. What I mean is adding a stronger level of FEC not because the network requires it, but because the data is more important. Basically MSF at expense of normal data has very low gain or flat out loss, but if the space is there in the packet it might work. This needs to be tested.
+
+A second problem with FEC back then was that the input data was not yet filtered properly. This means that the system jumped the gun way too quickly, so the FEC was applied to noisy outliers rather than just truly unexpected events. The problems because of this diminished the performance quite dramatically. Also the FEC method didn't look properly at large scale movements, as if it had an extremely short term memory. I think the FEC has a higher chance of success if the false alarm probability is minimized. 
+
+Also because the filtering is now way more effective, the false positive probability is already reduced by a lot, so I think that if I did this again with the new filter designs, the results would be much more promising/less depressing than what I got earlier.
+
+
+
+A final important aspect of the system that is already there, is that it is already some kind of FEC and conceilment method. The proposed system is based on a packetloss conceilment idea, and the transmitter tries to optimize the performance of the conceilment algo at the reciever end. Basically the proposed system tries to make the best out of a lossy network. Because of this, the FEC of uniform errors is already integrated into the system, and adding a separate FEC for the same problem would be probably be redundant and/or inefficient. I would think that improvements to this FEC should be searched for within the system (like the Media Specific Fortification I mentioned).
+
+Now for the burtsy errors... there are so many opportunities here. The sky is the limit :P
+
+
